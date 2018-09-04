@@ -22,9 +22,9 @@ class UserLogin(View):
 
 		return render(request, "login.html", {'username': username, 'checked': checked})
 
-	@ratelimit(key='ip', rate = '5 / m')
-	@ratelimit(key='post：username', rate = '5 / m')
-	@ratelimit(key='post：password', rate = '5 / m')
+	# @ratelimit(key='ip', rate = '5 / m')
+	# @ratelimit(key='post：username', rate = '5 / m')
+	# @ratelimit(key='post：password', rate = '5 / m')
 	def post(self, request):
 		username = request.POST.get('username')
 		password = request.POST.get('pwd')
