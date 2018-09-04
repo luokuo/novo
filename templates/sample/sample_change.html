@@ -1,0 +1,42 @@
+{% extends "sample/base.html" %}
+
+{% block javascript %}
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var change1 = $("#id_Panel").change(function () {
+
+                $.ajax({
+                    url: 'sample/(?P<pk>[^/]+)/change/',
+                    type: 'GET',
+                    data: {'panel': change1.val()},
+                    success: function (data) {
+                        if (data) {
+
+                            $("#message").html(data);
+                        } else {
+                            alert('添加失败')
+                        }
+                    }
+
+                })
+            })
+        })
+    </script>
+
+{% endblock %}
+{% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        <table>
+            {{ form.as_p }}
+            <tbody id="message">
+
+            </tbody>
+
+        </table>
+        <div class="submit-row">
+            <input type="submit" value="Update" class="default" name="_save"/>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% extends "sample/base.html" %}
+
+
+{% block content %}
+<form method='post'>
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+
+</table>
+{#<div style="height: auto;left: 0;width: 800px">#}
+{#    {% for ext in extfields %}#}
+<div id="message" style="height: auto;left: 0;width: 800px">
+
+{#        {{ ext.Label }} <input type='text' name='Name' maxlength='32'  required>#}
+
+
+</div>
+{#    {% endfor %}#}
+{#</div>#}
+<div class="submit-row">
+<input type="submit" value="提交" class="default" name="_save" />
+</div>
+</form>
+{% endblock %}
+{% block javascript %}
+    <script type="text/javascript">
+		//页面加载完成之后
+{#		$(function() {#}
+{#			//给整个窗口加载注册keydown事件#}
+{#            $("#id_Panel").change() {#}
+{#                getExtField();#}
+{#            }#}
+{#		});#}
+{#		function getExtField() {#}
+{#			//发送ajax请求完成登陆认证#}
+{#			$.ajax({#}
+{#					url : "{% url 'get_field' %}",#}
+{#					type : "post",#}
+{#					data : {#}
+{#						"user_account" : $("#user_account").val(),#}
+{#						"encoded_password" : $("#encoded_password").val()#}
+{#					},#}
+{#					beforeSend : function() {#}
+{#						$("#message").text("正在处理请稍等...");#}
+{#						return true;#}
+{#					},#}
+{#					success : function(jsonObject) {#}
+{#						if (jsonObject.success) {#}
+{#							window.location.href = "${pageContext.request.contextPath}/index";#}
+{#						} else {#}
+{#							$("#message").text(jsonObject.errMsg);#}
+{#						}#}
+{#					}#}
+{#				});#}
+{#		}#}
+
+	</script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        $(function() {
+    var change1 = $("#id_Panel").change(function () {
+
+       $.ajax({
+           url: '/getPanelField',
+           type: 'GET',
+           data: {'panel':change1.val()},
+
+{#           beforeSend: function (data) {#}
+{#               $("#message").html("for(i=0; i < data.extfields.length; i++) { <span>data.extfields[i].Label:</span><input type=data.extfields[i].Type name=data.extfields[i].Label maxlength='32' required><br>");#}
+{##}
+{#               $("#message").html("住院号:<input type='text' name='Name' maxlength='32'  required><br>");#}
+{#                   let obj=data.extfields;#}
+{#                   var arr=[];#}
+{#                   for(let i in obj){#}
+{#                       let o={name:1, v:obj[i]};#}
+{#                       arr.push(o);#}
+{#                   }#}
+{#                   alert(arr[0].v);#}
+{#               var inputHtml = "";#}
+{#                   for(var i=0; i < arr.length; i++){#}
+{#                       var obj1 = eval('(' + arr[i].v + ')');#}
+{#                       var la = obj1.Label;#}
+{#                       var ty = obj1.Type;#}
+{#                       inputHtml += "<input type="+ ty +" value="+ la +" maxlength='32' required><br>\n";#}
+{#                       $("#message").append(inputHtml);#}
+{#                           "<input type='text' name='Name' maxlength='32'  required><br>"#}
+{##}
+{#                   }#}
+{#               $("#message").html(inputHtml);#}
+{##}
+{##}
+{#               return true;#}
+{#           },#}
+           success: function (data) {
+               if (data.res == 1){
+                   console.log(data.extfields);
+{#                   let obj=data.extfields;#}
+{#                   var arr=[];#}
+{#                   for(let i in obj){#}
+{#                       let o={name:1,v:obj[i]};#}
+{#                       arr.push(o);#}
+{#                   }#}
+{#                   alert(arr[0].v);#}
+{#                   for(var i=0; i < arr.length; i++){#}
+{#                       var obj1 = eval('(' + arr[i].v + ')');#}
+{#                       alert(obj1.Label);#}
+{#                       alert(obj1.Type);#}
+{#                   }#}
+{#                   alert(arr[0].v);#}
+{#                   var obj3 = eval('(' + arr[0].v + ')');#}
+{#                   alert(obj3.Label);#}
+{#                   alert(obj3.Type);#}
+                   let obj=data.extfields;
+                   var arr=[];
+                   for(let i in obj){
+                       let o={name:1, v:obj[i]};
+                       arr.push(o);
+                   }
+                   alert(arr[0].v);
+               var inputHtml = "";
+                   for(var i=0; i < arr.length; i++){
+                       var obj1 = eval('(' + arr[i].v + ')');
+                       var la = obj1.Label;
+                       var ty = obj1.Type;
+                       inputHtml += "<input type="+ ty +" value="+ la +" maxlength='32' required><br>\n";
+{#                       $("#message").append(inputHtml);#}
+{#                           "<input type='text' name='Name' maxlength='32'  required><br>"#}
+
+                   }
+               $("#message").html(inputHtml);
+
+
+               }else{
+                   alert('添加失败')
+               }
+           }
+
+       })
+}) })
+    </script>
+{% endblock %}

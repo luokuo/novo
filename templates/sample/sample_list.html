@@ -1,0 +1,29 @@
+{% extends "sample/base.html" %}
+{% block content %}
+<h2>样本列表</h2>
+    {% if object_list %}
+        <table>
+            <tr>
+            {% for f in object_list.0.getLabel %}
+                <th>{{ f }}</th>
+                {% if forloop.first %}
+                {% endif %}
+            {% endfor %}
+            </tr>
+            {% for obj in object_list %}
+            <tr>
+            {% for f in obj.getData %}
+                {% if forloop.first %}
+                    <td><a href="{% url 'sample_info:sample_change' obj.pk %}">{{ obj.pk }}</a></td>
+                {% else %}
+                    <td>{{ f.2 }}</td>
+                {% endif %}
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+    <p>没有找到符合条件的记录，您可以点击右侧按钮加入这条记录。</p>
+    {% endif %}
+
+{% endblock %}

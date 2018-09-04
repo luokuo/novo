@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="favicon.ico" rel="shortcut icon">
+
+    <style>
+        table {
+    border-collapse: collapse;
+    border-color: #ccc;
+}
+
+td, th {
+    font-size: 13px;
+    line-height: 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+    padding: 8px;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+th {
+    font-weight: 600;
+    text-align: left;
+}
+
+    </style>
+</head>
+<body>
+<div>
+    <ul class="nav">
+        <li><a href="{% url 'sample_info:sample_list' %}">查看</a></li>
+        <li><a href="{% url 'sample_info:sample_add' %}">添加</a></li>
+
+    </ul>
+</div>
+{% block content %}
+
+{% endblock %}
+{% block javascript %}
+    {% endblock %}
+</body>
+</html>
